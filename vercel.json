@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "builds": [
+    { 
+      "src": "package.json", 
+      "use": "@vercel/static-build", 
+      "config": { "distDir": "dist" } 
+    },
+    { 
+      "src": "api/*.cjs", 
+      "use": "@vercel/node" 
+    }
+  ],
+  "rewrites": [
+    { 
+      "source": "/api/(.*)", 
+      "destination": "/api/$1.cjs" 
+    },
+    { 
+      "source": "/((?!api/).*)", 
+      "destination": "/index.html" 
+    }
+  ]
+}
